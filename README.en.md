@@ -2,7 +2,7 @@
 
 [中文](README.md) | English
 
-A pure front-end tool for interior design on a floor plan: place furniture, remove or modify walls, and take measurements on a 2D plan, then switch to a Three.js 3D scene with one click — view it from above or walk through it in first person. The whole app is a single `index.html`: no build step, just open it.
+A pure front-end tool for interior design on a floor plan: place furniture, remove or modify walls, and take measurements on a 2D plan, then switch to a Three.js 3D scene with one click — view it from above or walk through it in first person. The app is split into `index.html`, `styles.css`, `app.js`, and `view3d.js`, with no build step required.
 
 ## Features
 
@@ -42,7 +42,7 @@ python3 -m http.server 8000
 # Visit http://localhost:8000
 ```
 
-> Three.js is loaded from the jsDelivr CDN, so an internet connection is required the first time you open the 3D scene.
+> Three.js r160 is vendored under `vendor/three`, so the 3D scene does not require an external CDN at runtime.
 
 ## Keyboard Shortcuts
 

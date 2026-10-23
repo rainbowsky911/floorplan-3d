@@ -42,7 +42,7 @@ python3 -m http.server 8000
 # 访问 http://localhost:8000
 ```
 
-> Three.js 通过 jsDelivr CDN 加载，首次打开 3D 场景需要联网。
+> Three.js r160 已放在 `vendor/three` 中，运行 3D 场景不需要访问外部 CDN。
 
 ## 项目结构
 

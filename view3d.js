@@ -5,12 +5,12 @@
  *  3D → 2D：反向——家具收起、墙体下沉、镜头回到正俯视并淡出到平面图。
  * ============================================================ */
 (async () => {
-const THREE = await import('https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js');
-const {OrbitControls} = await import('https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/controls/OrbitControls.js');
-const {PointerLockControls} = await import('https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/controls/PointerLockControls.js');
-const {RoundedBoxGeometry} = await import('https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/geometries/RoundedBoxGeometry.js');
-const {RoomEnvironment} = await import('https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/environments/RoomEnvironment.js');
-const {CSS2DRenderer, CSS2DObject} = await import('https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/renderers/CSS2DRenderer.js');
+const THREE = await import('three');
+const {OrbitControls} = await import('three/addons/controls/OrbitControls.js');
+const {PointerLockControls} = await import('three/addons/controls/PointerLockControls.js');
+const {RoundedBoxGeometry} = await import('three/addons/geometries/RoundedBoxGeometry.js');
+const {RoomEnvironment} = await import('three/addons/environments/RoomEnvironment.js');
+const {CSS2DRenderer, CSS2DObject} = await import('three/addons/renderers/CSS2DRenderer.js');
 
 const stage = $('#stage'), host = $('#view3d');
 const OX = 7650, OY = 5100, H = 2.8, FOV = 45;       // 户型中心放在世界原点，层高 2.8 m

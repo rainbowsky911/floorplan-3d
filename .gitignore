@@ -23,3 +23,18 @@ tmp/
 # 环境变量
 .env
 .env.*
+
+# 本地化的浏览器运行时依赖（离线 3D 必需，必须提交）
+# 上面的 build/ 规则会匹配 vendor/three/build，因此在这里明确取消忽略。
+!vendor/
+!vendor/three/
+!vendor/three/build/
+!vendor/three/build/**
+!vendor/three/examples/
+!vendor/three/examples/**
+!vendor/three/LICENSE
+!vendor/three/package.json
+
+# 下载包与临时解压文件不提交
+*.tgz
+*.tar.gz
