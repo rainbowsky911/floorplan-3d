@@ -147,8 +147,8 @@ const MATS = {
 const LIB = [
   {cat:'卧室', items:[
     ['bed','双人床 1.8m',1800,2000,'#c9d6df'],['bed','双人床 1.5m',1500,2000,'#d8c7dc'],['bed','单人床',1200,2000,'#e8d5b5'],
-    ['crib','婴儿床',1250,700,'#efe3d0'],['nightstand','床头柜',450,400,'#e8dccb'],['wardrobe','衣柜',2000,600,'#efe6d8'],
-    ['wardrobe','小衣柜',1200,550,'#efe6d8'],['dresser','梳妆台',1000,450,'#efe6d8'],['desk','书桌',1200,600,'#e2cfb4'],
+    ['crib','婴儿床',1250,700,'#efe3d0'],['nightstand','床头柜',450,400,'#e8dccb'],['wardrobe','衣柜',2000,600,'#d6c3a8'],
+    ['wardrobe','小衣柜',1200,550,'#d6c3a8'],['dresser','梳妆台',1000,450,'#efe6d8'],['desk','书桌',1200,600,'#e2cfb4'],
     ['chair','椅子',450,480,'#cfc6b8'],['bookshelf','书架',800,300,'#e2cfb4'],['baycushion','飘窗垫',520,1800,'#e7dccd']]},
   {cat:'客厅', items:[
     ['sofa','三人沙发',2400,900,'#b7c4b0'],['sofa','双人沙发',1700,880,'#c3cbd6'],['cornersofa','转角沙发',2800,1700,'#b7c4b0'],
@@ -182,7 +182,7 @@ const F = (type,name,cx,cy,w,d,rot=0,color) => ({id:uid(),type,name,cx,cy,w,d,ro
 function defaultFurniture(){ return [
   // 次卧二（西北）
   F('bed','双人床 1.5m',1750,3800,1500,2000,0,'#e8d5b5'),
-  F('nightstand','床头柜',650,2900,450,400), F('wardrobe','衣柜',3150,3600,1800,600,90),
+  F('nightstand','床头柜',650,2900,450,400), F('wardrobe','衣柜',3150,3600,1800,600,90,'#d6c3a8'),
   F('desk','书桌',700,5250,1100,550,180),
   // 公卫
   F('shower','淋浴房',4000,2700,900,900), F('toilet','马桶',3900,4200,400,700,270),
@@ -195,7 +195,7 @@ function defaultFurniture(){ return [
   F('stove','燃气灶',10100,3450,750,450,90), F('ksink','水槽',10100,2350,800,450,90),
   F('fridge','冰箱',8350,3950,700,700),
   // 衣帽间：柜体靠上、靠左，右下角保留进入主卧的通道
-  F('wardrobe','衣柜',1800,6000,2400,600,0), F('wardrobe','衣柜',300,6500,1600,600,90),
+  F('wardrobe','衣柜',1800,6000,2400,600,0,'#d6c3a8'), F('wardrobe','衣柜',300,6500,1600,600,90,'#d6c3a8'),
   // 主卫浴与主卧
   F('shower','淋浴房',500,7800,900,900), F('toilet','马桶',500,9200,400,700,270),
   F('vanity','浴室柜',1300,9800,700,500,180),
@@ -214,7 +214,7 @@ function defaultFurniture(){ return [
   // 右侧次卧与阳台二
   F('bed','双人床 1.5m',13800,6650,1500,2000,270,'#c9d6df'),
   F('nightstand','床头柜',12700,5950,450,400), F('nightstand','床头柜',12700,7350,450,400),
-  F('wardrobe','衣柜',14950,7200,1800,600,90), F('washer','洗衣机',14900,9700,600,600,90),
+  F('wardrobe','衣柜',14950,7200,1800,600,90,'#d6c3a8'), F('washer','洗衣机',14900,9700,600,600,90),
 
 ];}
 
@@ -223,7 +223,7 @@ function defaultState(){
   return {furniture:defaultFurniture(), rooms, demolished:[], measures:[]};
 }
 
-const STORE = 'yue-jiuzhang-design-v16';
+const STORE = 'yue-jiuzhang-design-v19';
 function load(){
   try { const s = JSON.parse(localStorage.getItem(STORE)); if (s && Array.isArray(s.furniture)) return fixState(s); } catch(e) {}
   return null;
@@ -333,10 +333,10 @@ function furnSVG(t,w,d,c){
     }
     case 'nightstand': return rc(x,y,w,d,c,'rx="30"') + `<circle r="${m*.24}" fill="#fff6dd" ${ST}/>` + `<circle r="${m*.08}" fill="${shade(c,.8)}" ${ST}/>`;
     case 'wardrobe': {
-      const panels = Math.max(2, Math.round(w/600)), pw = w/panels;
-      let s = rc(x,y,w,d,shade(c,1.03),'rx="18"') + rc(x+35,y+35,w-70,d-70,'none','rx="12" opacity=".45"');
-      for (let i=1;i<panels;i++) s += ln(x+i*pw,y+35,x+i*pw,y+d-35,'opacity=".5"');
-      for (let i=0;i<panels;i++){ const hx=x+(i+.5)*pw; s += ln(hx-28,-28,hx-28,28,'stroke-width="1.4"') + ln(hx+28,-28,hx+28,28,'stroke-width="1.4"'); }
+      const panels = Math.max(2, Math.min(4, Math.round(w/650))), pw = w/panels, handle = '#665748';
+      let s = rc(x,y,w,d,c,'rx="20"') + rc(x+28,y+28,w-56,d-56,c,'rx="14" opacity=".96"');
+      for (let i=1;i<panels;i++) s += ln(x+i*pw,y+38,x+i*pw,y+d-38,'opacity=".38"');
+      for (let i=0;i<panels;i++){ const hx=x+(i+.5)*pw, dir=i<panels/2?1:-1; s += rc(hx+dir*24-6,-58,12,116,handle,'rx="6" stroke="none"'); }
       return s;
     }
     case 'cabinet': case 'shoecab': return rc(x,y,w,d,c) + ln(x,y+d,x+w,y);

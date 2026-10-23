@@ -336,10 +336,14 @@ function buildFurniture(f){
     case 'wardrobe': case 'cabinet': case 'shoecab': {
       const cm = mat(c, {roughness:.55}), fz = d/2 - .02;
       if (f.type === 'wardrobe'){
-        const h = 2.2, n = Math.max(1, Math.round(w/.5));
-        g.add(box(w - .02, .08, d - .06, '#4a4641', 0, 0, -.03), box(w, h - .08, d - .02, cm, 0, .08, -.01));
-        fronts(g, -w/2, .08, w, h - .1, fz, n, 1, cm, 'bar', 1.05);
-        g.add(box(w, .02, d - .02, darker(c, .9), 0, h - .02, -.01));
+        const h = 2.2, n = Math.max(2, Math.min(4, Math.round(w/.65))), pw = w/n, wood = woodM(c), handle = mat('#665748', {metalness:.15, roughness:.55});
+        g.add(box(w - .02, .08, d - .06, wood, 0, 0, -.03), rbox(w, h - .08, d - .02, wood, 0, .08, -.01, .018));
+        g.add(rbox(w + .035, .06, d + .015, wood, 0, h - .04, 0, .012), rbox(w + .025, .08, d + .01, wood, 0, .04, 0, .01));
+        for (let i=0;i<n;i++){
+          const x=-w/2+(i+.5)*pw;
+          g.add(rbox(pw-.025, h-.18, .035, wood, x, .1, fz+.025, .012));
+          const dir=i<n/2?1:-1; g.add(rbox(.018,.34,.025,handle,x+dir*pw*.14,1.0,fz+.052,.007));
+        }
       } else if (f.type === 'shoecab'){
         const h = 1.0, y0 = .16, n = Math.max(1, Math.round(w/.45));
         g.add(box(w, h - y0, d - .02, cm, 0, y0, -.01), box(w - .04, .01, .03, glowMat('#fff7e6', '#ffe9c4', .8), 0, y0 - .01, fz - .06));   // 悬空 + 底部灯带
