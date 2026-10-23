@@ -43,7 +43,7 @@ function applyStaticLang(){
 
 /* ============================================================
  *  悦九章约 130㎡户型
- *  几何、动线与门窗关系以 130_beike2.jpg 为准。
+ *  几何、动线与门窗关系参考 130_beike2.jpg。
  *  总控制尺寸 15300 × 10200 mm；可使用空间合计 123.11㎡。
  *  厨房北侧阳台、主卧套房入口、衣帽间和右侧次卧均按新参考图重建。
  * ============================================================ */
@@ -553,7 +553,7 @@ function renderAll(){
 
 function updateHeader(){
   const tot = ROOMS.filter(r => r.counted !== false).reduce((a,r) => a + roomArea(r), 0);
-  $('#subtitle').textContent = tr(`户型以 jiuzhangbeike2 为准 · 使用面积 ${fmt(tot)} m²`, `Based on jiuzhangbeike2 · Usable area ${fmt(tot)} m²`);
+  $('#subtitle').textContent = tr(`使用面积 ${fmt(tot)} m²`, `Usable area ${fmt(tot)} m²`);
   $('#undo').disabled = !undoStack.length; $('#redo').disabled = !redoStack.length;
   $('#undo').style.opacity = undoStack.length ? 1 : .4; $('#redo').style.opacity = redoStack.length ? 1 : .4;
 }
