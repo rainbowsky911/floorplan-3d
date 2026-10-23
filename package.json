@@ -1,0 +1,10 @@
+{
+  "name": "floorplan-3d",
+  "version": "1.0.0",
+  "description": "纯前端户型装修设计工具",
+  "private": true,
+  "scripts": {
+    "start": "python -m http.server 8000",
+    "dev": "python -m http.server 8000"
+  }
+}
