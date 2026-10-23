@@ -2,7 +2,7 @@
 
 中文 | [English](README.en.md)
 
-纯前端的户型装修设计工具：在 2D 平面图上摆放家具、拆改墙体、测量尺寸，一键切换到 Three.js 3D 场景，可以鸟瞰，也可以第一人称漫游。整个应用就是一个 `index.html`，无需构建，打开即用。
+纯前端的户型装修设计工具：在 2D 平面图上摆放家具、拆改墙体、测量尺寸，一键切换到 Three.js 3D 场景，可以鸟瞰，也可以第一人称漫游。应用已拆分为 `index.html`、`styles.css`、`app.js` 和 `view3d.js`，无需构建。
 
 ## 功能
 
@@ -35,7 +35,7 @@ git clone <仓库地址>
 cd <仓库目录>
 ```
 
-然后直接用浏览器打开 `index.html`。也可以起一个本地静态服务器：
+建议双击 `start-server.cmd`，或启动本地静态服务器：
 
 ```bash
 python3 -m http.server 8000
@@ -43,6 +43,14 @@ python3 -m http.server 8000
 ```
 
 > Three.js 通过 jsDelivr CDN 加载，首次打开 3D 场景需要联网。
+
+## 项目结构
+
+- `index.html`：页面结构
+- `styles.css`：页面和响应式样式
+- `app.js`：户型数据、2D绘制、家具和交互
+- `view3d.js`：Three.js 3D场景、漫游和光照
+- `start-server.cmd`：Windows一键启动页面
 
 ## 快捷键
 
@@ -70,7 +78,7 @@ python3 -m http.server 8000
 
 ## 自定义户型
 
-户型数据写在 `index.html` 里：
+户型和默认方案数据写在 `app.js` 里：
 
 - `ROOMS`：房间多边形、名称、默认地面材料
 - `WALLS` / `WINS`：墙体与窗洞
